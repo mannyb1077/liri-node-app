@@ -1,6 +1,10 @@
 # liri-node-app
 
+![Homework8](assets/images/screenshot1.png)
 
-Questions:
+![Homework8](assets/images/screenshot2.png)
 
-1. undefined solution
+![Homework8](assets/images/screenshot3.png)
+
+![Homework8](assets/images/screenshot4.png)
+

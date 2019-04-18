@@ -4,8 +4,10 @@ var keys = require("./keys.js");
 var request = require("request");
 var fs = require('fs');
 var axios = require("axios")
+var inquirer = require('inquirer');
 var Spotify = require('node-spotify-api'); 
 var spotify = new Spotify(keys.spotify);
+var random = "";
 var omdb = "";
 var omdbAPIKey = "128bfb02"
 var action = process.argv[2];
@@ -38,6 +40,18 @@ function switchFunction()
   
     }
 };
+
+
+inquirer.prompt([
+    /* Pass your questions in here */
+
+
+  ])
+  .then(answers => {
+    // Use user feedback for... whatever!!
+
+
+  });
 
 //Spotify
 
@@ -116,8 +130,28 @@ function concertThis(userInput)
 
 function doWhatItSays()
 {
-   var random = fs.readFileSync('random.txt', 'utf8');
+   random = fs.readFileSync('random.txt', 'utf8');
    console.log(random);
+   usersplit = random.split(",");
+   userInput = usersplit.subtr(18, 1);
+   console.log(userInput);
+
+   spotify.search({ type: 'track', query: userInput, limit: 1 }, function(err, response) 
+    {
+        if (err) 
+        {
+          return console.log('Error occurred: ' + err);
+        }        
+        console.log(`\n-----------------------------------------------\n`)
+        console.log("Artist: " +response.tracks.items[0].artists[0].name);
+        console.log("Album: " +response.tracks.items[0].album.name);
+        console.log("Song: " +response.tracks.items[0].name);
+        console.log("\nSong Preview ⬇︎");
+        console.log(response.tracks.items[0].preview_url); 
+        console.log("\nPlay song in Spotify ⬇︎");
+        console.log( response.tracks.items[0].external_urls.spotify);
+        console.log(`\n-----------------------------------------------\n`)
+    });
   
 };
 
